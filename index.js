@@ -1,12 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 3003;
+const port = 3008;
 
 app.get('/', (req, res) => {
-  const time = new Date().toLocaleTimeString();
-  res.send(`Сервер обновлён в: ${time}`);
-  // res.send('I want to become a backend developer!');
-  // console.log('✅ Сервер запущен!');
+  res.send('Hello');
 })
 
 app.listen(port, () => {
