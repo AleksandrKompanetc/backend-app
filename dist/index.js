@@ -44,6 +44,9 @@ app.get('/', (req, res) => {
 app.get('/products', (req, res) => {
     res.send(products);
 });
+app.get('/addresses', (req, res) => {
+    res.send(addresses);
+});
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
