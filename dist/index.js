@@ -37,6 +37,7 @@ const express_1 = __importStar(require("express"));
 const app = (0, express_1.default)();
 const port = 3011;
 const products = [{ title: 'tomato' }, { title: 'orange' }];
+const addresses = [{ value: 'Molodizhna' }, { value: 'Malyshka' }];
 app.get('/', (req, res) => {
     res.send('Hello world! Yo!');
 });
