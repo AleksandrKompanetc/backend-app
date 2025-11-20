@@ -44,6 +44,10 @@ app.get('/', (req, res) => {
 app.get('/products', (req, res) => {
     res.send(products);
 });
+app.get('/products/tomato', (req, res) => {
+    let tomato = products.find(p => p.title === 'tomato');
+    res.send(tomato);
+});
 app.get('/addresses', (req, res) => {
     res.send(addresses);
 });
