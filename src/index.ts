@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 
 const app = express();
-const port = 3011;
+const port = process.env.PORT || 5000;
 
 const products = [{title: 'tomato'}, {title: 'orange'}];
 const addresses = [{value: 'Molodizhna'}, {value: 'Malyshka'}];
