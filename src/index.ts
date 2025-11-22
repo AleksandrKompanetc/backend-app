@@ -24,7 +24,13 @@ app.get('/products/:productTitle', (req: Request, res: Response) => {
   
 })
 
-app.get('/addresses', (req: Request, res: Response) => {
+app.get('/addresses/:id', (req: Request, res: Response) => {
+  let address = addresses.find(a => a.id === +req.params.id);
+  if (address) {
+    res.send(address);
+  } else {
+    res.send(404);
+  }
   res.send(addresses);
 })
 

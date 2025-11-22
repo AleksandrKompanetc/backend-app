@@ -53,7 +53,14 @@ app.get('/products/:productTitle', (req, res) => {
         res.send(404);
     }
 });
-app.get('/addresses', (req, res) => {
+app.get('/addresses/:id', (req, res) => {
+    let address = addresses.find(a => a.id === +req.params.id);
+    if (address) {
+        res.send(address);
+    }
+    else {
+        res.send(404);
+    }
     res.send(addresses);
 });
 app.listen(port, () => {
