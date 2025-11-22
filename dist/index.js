@@ -44,8 +44,8 @@ app.get('/', (req, res) => {
 app.get('/products', (req, res) => {
     res.send(products);
 });
-app.get('/products/tomato', (req, res) => {
-    let tomato = products.find(p => p.title === 'tomato');
+app.get('/products/:productTitle', (req, res) => {
+    let tomato = products.find(p => p.title === req.params.productTitle);
     res.send(tomato);
 });
 app.get('/addresses', (req, res) => {
