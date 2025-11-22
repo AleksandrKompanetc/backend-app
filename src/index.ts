@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const products = [{title: 'tomato'}, {title: 'orange'}];
-const addresses = [{value: 'Molodizhna'}, {value: 'Malyshka'}];
+const addresses = [{id: 1, value: 'Molodizhna'}, {id: 2, value: 'Malyshka'}];
 
 app.get('/', (req: express.Request, res: express.Response) => {
   res.send('Hello world! Yo!');
