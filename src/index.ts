@@ -3,15 +3,20 @@ import express, { Request, Response } from 'express';
 const app = express();
 const port = process.env.PORT || 5000;
 
-const products = [{title: 'tomato'}, {title: 'orange'}];
+const products = [{id: 1, title: 'tomato'}, {id: 2, title: 'orange'}];
 const addresses = [{id: 1, value: 'Molodizhna'}, {id: 2, value: 'Malyshka'}];
 
 app.get('/', (req: express.Request, res: express.Response) => {
   res.send('Hello world! Yo!');
 })
 
-app.get('/products', (req: Request, res: Response) => {
-  res.send(products);
+app.get('/products/:id', (req: Request, res: Response) => {
+  let product = products.find(p => p.id === +req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.send(404);
+  }
 })
 
 app.get('/products/:productTitle', (req: Request, res: Response) => {

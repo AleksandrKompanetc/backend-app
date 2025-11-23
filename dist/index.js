@@ -36,13 +36,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 5000;
-const products = [{ title: 'tomato' }, { title: 'orange' }];
+const products = [{ id: 1, title: 'tomato' }, { id: 2, title: 'orange' }];
 const addresses = [{ id: 1, value: 'Molodizhna' }, { id: 2, value: 'Malyshka' }];
 app.get('/', (req, res) => {
     res.send('Hello world! Yo!');
 });
-app.get('/products', (req, res) => {
-    res.send(products);
+app.get('/products/:id', (req, res) => {
+    let product = products.find(p => p.id === +req.params.id);
+    if (product) {
+        res.send(product);
+    }
+    else {
+        res.send(404);
+    }
 });
 app.get('/products/:productTitle', (req, res) => {
     let product = products.find(p => p.title === req.params.productTitle);
