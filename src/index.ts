@@ -6,8 +6,12 @@ const port = process.env.PORT || 5000;
 const products = [{id: 1, title: 'tomato'}, {id: 2, title: 'orange'}];
 const addresses = [{id: 1, value: 'Molodizhna'}, {id: 2, value: 'Malyshka'}];
 
-app.get('/', (req: express.Request, res: express.Response) => {
-  res.send('Hello world! Yo!');
+app.get('/products', (req: Request, res: Response) => {
+  if (req.query.title) {
+    res.send(products.filter(p => p.title.indexOf(req.query.title as string) > -1));
+  } else {
+    res.send(products);
+  }
 })
 
 app.get('/products/:id', (req: Request, res: Response) => {

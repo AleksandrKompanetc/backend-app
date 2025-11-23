@@ -38,8 +38,13 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 5000;
 const products = [{ id: 1, title: 'tomato' }, { id: 2, title: 'orange' }];
 const addresses = [{ id: 1, value: 'Molodizhna' }, { id: 2, value: 'Malyshka' }];
-app.get('/', (req, res) => {
-    res.send('Hello world! Yo!');
+app.get('/products', (req, res) => {
+    if (req.query.title) {
+        res.send(products.filter(p => p.title.indexOf(req.query.title) > -1));
+    }
+    else {
+        res.send(products);
+    }
 });
 app.get('/products/:id', (req, res) => {
     let product = products.find(p => p.id === +req.params.id);
