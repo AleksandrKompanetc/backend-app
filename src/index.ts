@@ -23,6 +23,15 @@ app.get('/products/:id', (req: Request, res: Response) => {
   }
 })
 
+app.delete('/products/:id', (req: Request, res: Response) => {
+  let product = products.find(p => p.id === +req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.send(404);
+  }
+})
+
 app.get('/products/:productTitle', (req: Request, res: Response) => {
   let product = products.find(p => p.title === req.params.productTitle);
   if (product) {
