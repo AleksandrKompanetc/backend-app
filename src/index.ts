@@ -15,13 +15,14 @@ app.get('/products', (req: Request, res: Response) => {
 })
 
 app.get('/products/:id', (req: Request, res: Response) => {
-  let product = products.find(p => p.id === +req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.send(404);
+  const newProduct = {
+    id: +(new Date()),
+    title: res.body.title
   }
+  products.push(newProduct);
+  res.status(201).send(newProduct);
 })
+
 
 app.delete('/products/:id', (req: Request, res: Response) => {
   for ( let i = 0; i < products.length; i++) {
