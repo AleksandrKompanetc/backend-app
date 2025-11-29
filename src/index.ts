@@ -46,7 +46,13 @@ app.get('/products/:productTitle', (req: Request, res: Response) => {
   } else {
     res.send(404);
   }
-  
+})
+
+app.put('/products/:id', (req: Request, res: Response) => {
+  let product = products.find(p => p.id === +req.params.id);
+  if (product) {
+    res.send(product);
+  }
 })
 
 app.get('/addresses/:id', (req: Request, res: Response) => {
