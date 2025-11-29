@@ -7,6 +7,9 @@ const port = process.env.PORT || 5000;
 const products = [{id: 1, title: 'tomato'}, {id: 2, title: 'orange'}];
 const addresses = [{id: 1, value: 'Molodizhna'}, {id: 2, value: 'Malyshka'}];
 
+const parserMiddleware = bodyParser.json();
+app.use(parserMiddleware);
+
 app.get('/products', (req: Request, res: Response) => {
   if (req.query.title) {
     res.send(products.filter(p => p.title.indexOf(req.query.title as string) > -1));
