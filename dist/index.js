@@ -82,6 +82,7 @@ app.get('/products/:productTitle', (req, res) => {
 app.put('/products/:id', (req, res) => {
     let product = products.find(p => p.id === +req.params.id);
     if (product) {
+        product.title = req.body.title;
         res.send(product);
     }
 });
