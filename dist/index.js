@@ -52,6 +52,14 @@ app.get('/products', (req, res) => {
         res.send(products);
     }
 });
+app.get('/products', (req, res) => {
+    if (req.query.title) {
+        res.send(products.filter(p => p.title.indexOf(req.query.title) > -1));
+    }
+    else {
+        res.send(products);
+    }
+});
 app.get('/products/:id', (req, res) => {
     const newProduct = {
         id: +(new Date()),

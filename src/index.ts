@@ -18,6 +18,14 @@ app.get('/products', (req: Request, res: Response) => {
   }
 })
 
+app.get('/products', (req: Request, res: Response) => {
+  if (req.query.title) {
+    res.send(products.filter(p => p.title.indexOf(req.query.title as string) > -1));
+  } else {
+    res.send(products);
+  }
+})
+
 app.get('/products/:id', (req: Request, res: Response) => {
   const newProduct = {
     id: +(new Date()),
