@@ -10,6 +10,19 @@ const addresses = [{id: 1, value: 'Molodizhna'}, {id: 2, value: 'Malyshka'}];
 const parserMiddleware = bodyParser.json();
 app.use(parserMiddleware);
 
+const db = {
+  courses: [
+    {id: 1, title: 'front-end'},
+    {id: 2, title: 'back-end'},
+    {id: 3, title: 'automation qa'},
+    {id: 4, title: 'devops'}
+  ]
+}
+
+app.get('/courses', (req: Request, res: Response) => {
+  let foundCourses = db.courses;
+})
+
 app.get('/products', (req: Request, res: Response) => {
   if (req.query.title) {
     res.send(products.filter(p => p.title.indexOf(req.query.title as string) > -1));
