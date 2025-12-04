@@ -87,6 +87,10 @@ app.get('/addresses/:id', (req: Request, res: Response) => {
   res.send(addresses);
 })
 
+app.delete('/__test__/data', (req, res) => {
+  db.courses = [];
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
