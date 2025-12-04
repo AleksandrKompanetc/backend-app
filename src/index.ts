@@ -89,6 +89,7 @@ app.get('/addresses/:id', (req: Request, res: Response) => {
 
 app.delete('/__test__/data', (req, res) => {
   db.courses = [];
+  res.sendStatus(204);
 })
 
 app.listen(port, () => {
