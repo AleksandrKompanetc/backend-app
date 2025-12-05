@@ -18,7 +18,14 @@ describe('/course', () => {
       .expect(404)
   })
 
-  it(`shouldn't create course with incorrect input data`, async () => {
+  it(`should create course with correct input data`, async () => {
+    const createResponse = await request(app)
+      .post('/courses')
+      .send({title: 'It-incubator course'})
+      .expect(201)
+
+    const createdCourse = createResponse.body
+
     await request(app)
       .post('/courses')
       .send({title: ''})
