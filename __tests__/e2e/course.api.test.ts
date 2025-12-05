@@ -26,9 +26,17 @@ describe('/course', () => {
 
     const createdCourse = createResponse.body
 
+    expect(createdCourse).toEqual({
+      id: expect.any(Number),
+      title: 'It-incubator course'
+    })
+
     await request(app)
-      .post('/courses')
-      .send({title: ''})
-      .expect(400)
+      .get('/courses')
+      .expect(200, [createdCourse])
+  })
+
+  it(`shouldn't update course with incorrect input data`, async () => {
+    
   })
 })
