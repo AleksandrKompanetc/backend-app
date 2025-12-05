@@ -1,4 +1,5 @@
-import request from 'supertest';
+import request from 'supertest'
+import { app } from '../../src/index'
 
 describe('/course', () => {
   beforeAll(async () => {
@@ -15,5 +16,12 @@ describe('/course', () => {
     await request(app)
       .get('/courses/9999')
       .expect(404)
+  })
+
+  it(`shouldn't create course with incorrect input data`, async () => {
+    await request(app)
+      .post('/courses')
+      .send({title: ''})
+      .expect(400)
   })
 })
