@@ -37,6 +37,7 @@ describe('/course', () => {
   })
 
   it(`shouldn't update course with incorrect input data`, async () => {
-    
+    await request(app)
+      .put
   })
 })
