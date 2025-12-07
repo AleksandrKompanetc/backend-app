@@ -14,6 +14,16 @@ const db = {
     {id: 4, title: 'devops'}
   ]
 }
+
+app.get('/courses', (req, res) => {
+  let foundCourses = db.courses
+
+  if (req.query.title) {
+    foundCourses = foundCourses.filter(c => c.title.indexOf(req.query.title as string) > -1)
+  }
+
+  res.json(foundCourses)
+})
 // import express, { Request, Response } from 'express';
 // import bodyParser from 'body-parser';
 
