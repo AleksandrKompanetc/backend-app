@@ -5,6 +5,15 @@ const port = 3000
 
 const jsonBodyMiddleware = express.json()
 app.use(jsonBodyMiddleware)
+
+const db = {
+  courses: [
+    {id: 1, title: 'front-end'},
+    {id: 2, title: 'back-end'},
+    {id: 3, title: 'automation qa'},
+    {id: 4, title: 'devops'}
+  ]
+}
 // import express, { Request, Response } from 'express';
 // import bodyParser from 'body-parser';
 
