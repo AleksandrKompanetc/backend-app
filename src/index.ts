@@ -35,6 +35,23 @@ app.get('/courses/:id', (req, res) => {
 
   res.json(foundCourse)
 })
+
+app.post('/courses', (req, res) => {
+  if (!req.body.title) {
+    res.sendStatus(400)
+    return
+  }
+
+  const createdCourse = {
+    id: +(new Date()),
+    title: req.body.title
+  }
+  db.courses.push(createdCourse)
+
+  res
+    .status(201)
+    .json(createdCourse)
+})
 // import express, { Request, Response } from 'express';
 // import bodyParser from 'body-parser';
 
