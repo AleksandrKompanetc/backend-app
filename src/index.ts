@@ -54,6 +54,11 @@ app.post('/courses', (req, res) => {
 })
 
 app.delete('/courses/:id', (req, res) => {
+  db.courses = db.courses.filter(c => c.id !== +req.params.id)
+  res.sendStatus(204)
+})
+
+app.put('/courses/:id', (req, res) => {
   
 })
 // import express, { Request, Response } from 'express';
