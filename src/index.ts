@@ -24,6 +24,17 @@ app.get('/courses', (req, res) => {
 
   res.json(foundCourses)
 })
+
+app.get('/courses/:id', (req, res) => {
+  const foundCourse = db.courses.find(c => c.id === +req.params.id)
+
+  if (!foundCourse) {
+    res.sendStatus(404)
+    return
+  }
+
+  res.json(foundCourse)
+})
 // import express, { Request, Response } from 'express';
 // import bodyParser from 'body-parser';
 
