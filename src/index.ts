@@ -20,7 +20,7 @@ const db: { courses: CourseType[]} = {
   ]
 }
 
-app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<>) => {
+app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<CourseType[]>) => {
   let foundCourses = db.courses
 
   if (req.query.title) {
@@ -30,7 +30,7 @@ app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<>)
   res.json(foundCourses)
 })
 
-app.get('/courses/:id', (req, res) => {
+app.get('/courses/:id', (req: Request<{id: string}>, res) => {
   const foundCourse = db.courses.find(c => c.id === +req.params.id)
 
   if (!foundCourse) {
