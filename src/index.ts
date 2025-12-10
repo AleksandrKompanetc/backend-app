@@ -1,4 +1,4 @@
-const express from 'express'
+const express, { Request, Response } from 'express'
 
 export const app = express()
 const port = 3000
@@ -15,7 +15,7 @@ const db = {
   ]
 }
 
-app.get('/courses', (req, res) => {
+app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response) => {
   let foundCourses = db.courses
 
   if (req.query.title) {
