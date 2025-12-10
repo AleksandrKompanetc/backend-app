@@ -59,7 +59,19 @@ app.delete('/courses/:id', (req, res) => {
 })
 
 app.put('/courses/:id', (req, res) => {
-  
+  if (!req.body.title) {
+    res.sendStatus(400)
+    return
+  }
+
+  const foundCourse = db.courses.find(c => c.id === +req.params.id)
+  if (!foundCourse) {
+    res.sendStatus(404)
+    return
+  } 
+
+  foundCourse.title = req.body.title
+  res.sendStatus(204)
 })
 // import express, { Request, Response } from 'express';
 // import bodyParser from 'body-parser';
