@@ -6,7 +6,12 @@ const port = 3000
 const jsonBodyMiddleware = express.json()
 app.use(jsonBodyMiddleware)
 
-const db = {
+type CourseType = {
+  id: number
+  title: string
+}
+
+const db: { courses: CourseType[]} = {
   courses: [
     {id: 1, title: 'front-end'},
     {id: 2, title: 'back-end'},
@@ -15,7 +20,7 @@ const db = {
   ]
 }
 
-app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response) => {
+app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<>) => {
   let foundCourses = db.courses
 
   if (req.query.title) {
