@@ -58,12 +58,12 @@ app.post('/courses', (req: Request<{}, {}, {title: string}>, res: Response<Cours
     .json(createdCourse)
 })
 
-app.delete('/courses/:id', (req, res) => {
+app.delete('/courses/:id', (req: Request<{id: string}>, res) => {
   db.courses = db.courses.filter(c => c.id !== +req.params.id)
   res.sendStatus(204)
 })
 
-app.put('/courses/:id', (req, res) => {
+app.put('/courses/:id', (req: Request<{id: string}, {}, {title: string}>, res) => {
   if (!req.body.title) {
     res.sendStatus(400)
     return
@@ -80,7 +80,11 @@ app.put('/courses/:id', (req, res) => {
 })
 
 app.delete('/__test__/data', (req, res) => {
-  
+
+})
+
+export const server = app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
 })
 // import express, { Request, Response } from 'express';
 // import bodyParser from 'body-parser';
