@@ -78,6 +78,10 @@ app.put('/courses/:id', (req, res) => {
   foundCourse.title = req.body.title
   res.sendStatus(204)
 })
+
+app.delete('/__test__/data', (req, res) => {
+  
+})
 // import express, { Request, Response } from 'express';
 // import bodyParser from 'body-parser';
 
