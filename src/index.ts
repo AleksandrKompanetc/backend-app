@@ -20,7 +20,7 @@ const db: { courses: CourseType[]} = {
   ]
 }
 
-app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<CourseType[]>) => {
+app.get('/courses', (req: RequestWithQuery<{title: string}>, res: Response<CourseType[]>) => {
   let foundCourses = db.courses
 
   if (req.query.title) {
@@ -30,7 +30,7 @@ app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<Co
   res.json(foundCourses)
 })
 
-app.get('/courses/:id', (req: Request<{id: string}>, res) => {
+app.get('/courses/:id', (req: RequestWithParams<{id: string}>, res) => {
   const foundCourse = db.courses.find(c => c.id === +req.params.id)
 
   if (!foundCourse) {
@@ -41,7 +41,7 @@ app.get('/courses/:id', (req: Request<{id: string}>, res) => {
   res.json(foundCourse)
 })
 
-app.post('/courses', (req: Request<{}, {}, {title: string}>, res: Response<CourseType>) => {
+app.post('/courses', (req: RequestWithBody<{title: string}>, res: Response<CourseType>) => {
   if (!req.body.title) {
     res.sendStatus(400)
     return
