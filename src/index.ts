@@ -58,12 +58,12 @@ app.post('/courses', (req: RequestWithBody<{title: string}>, res: Response<Cours
     .json(createdCourse)
 })
 
-app.delete('/courses/:id', (req: Request<{id: string}>, res) => {
+app.delete('/courses/:id', (req: RequestWithParams<{id: string}>, res) => {
   db.courses = db.courses.filter(c => c.id !== +req.params.id)
   res.sendStatus(204)
 })
 
-app.put('/courses/:id', (req: Request<{id: string}, {}, {title: string}>, res) => {
+app.put('/courses/:id', (req: RequestWithParamsAndBody<{id: string}, {}, {title: string}>, res) => {
   if (!req.body.title) {
     res.sendStatus(400)
     return
