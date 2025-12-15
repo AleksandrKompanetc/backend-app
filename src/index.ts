@@ -20,7 +20,7 @@ const db: { courses: CourseType[]} = {
   ]
 }
 
-app.get('/courses', (req: RequestWithQuery<{title: string}>, res: Response<CourseType[]>) => {
+app.get('/courses', (req: RequestWithQuery<QueryCoursesModel>, res: Response<CourseViewModel>) => {
   let foundCourses = db.courses
 
   if (req.query.title) {
