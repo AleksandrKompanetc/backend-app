@@ -1,3 +1,3 @@
-export type UpdateCourseModel = {
+export type URIParamsCourseIdModel = {
   id: string
 }
