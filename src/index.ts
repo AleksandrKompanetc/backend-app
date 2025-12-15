@@ -9,14 +9,15 @@ app.use(jsonBodyMiddleware)
 type CourseType = {
   id: number
   title: string
+  studentsCount: number
 }
 
 const db: { courses: CourseType[]} = {
   courses: [
-    {id: 1, title: 'front-end'},
-    {id: 2, title: 'back-end'},
-    {id: 3, title: 'automation qa'},
-    {id: 4, title: 'devops'}
+    {id: 1, title: 'front-end', studentsCount: 10 },
+    {id: 2, title: 'back-end', studentsCount: 10 },
+    {id: 3, title: 'automation qa', studentsCount: 10},
+    {id: 4, title: 'devops', studentsCount: 10}
   ]
 }
 
@@ -27,10 +28,15 @@ app.get('/courses', (req: RequestWithQuery<QueryCoursesModel>, res: Response<Cou
     foundCourses = foundCourses.filter(c => c.title.indexOf(req.query.title as string) > -1)
   }
 
-  res.json(foundCourses)
+  res.json(foundCourses.map(dbCourse => {
+    return {
+      id: dbCourse.id,
+      title: dbCourse.title
+    }
+  }) )
 })
 
-app.get('/courses/:id', (req: RequestWithParams<{id: string}>, res) => {
+app.get('/courses/:id', (req: RequestWithParams<{id: string}>, res: Response<CourseViewModel>) => {
   const foundCourse = db.courses.find(c => c.id === +req.params.id)
 
   if (!foundCourse) {
@@ -38,10 +44,13 @@ app.get('/courses/:id', (req: RequestWithParams<{id: string}>, res) => {
     return
   }
 
-  res.json(foundCourse)
+  res.json({
+    id: foundCourse.id,
+    title: foundCourse.title
+  })
 })
 
-app.post('/courses', (req: RequestWithBody<{title: string}>, res: Response<CourseType>) => {
+app.post('/courses', (req: RequestWithBody<{title: string}>, res: Response<CourseViewModel>) => {
   if (!req.body.title) {
     res.sendStatus(400)
     return
