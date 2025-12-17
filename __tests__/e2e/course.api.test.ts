@@ -39,11 +39,6 @@ describe('/course', () => {
       .expect(200, [createdCourse])
   })
 
-  it(`shouldn't update course with incorrect input data`, async () => {
-    await request(app)
-      .put
-  })
-
   it('create one more course', async () => {
     const data: CreateCourseModel = {title: 'It-incubator course 2'}
 
@@ -59,6 +54,10 @@ describe('/course', () => {
       title: data.title
     })  
 
-    
+    await request(app)
+      .get('/courses')
+      .expect(200, [createdCourse])
   })
+
+  
 })
