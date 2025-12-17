@@ -1,5 +1,6 @@
 import request from 'supertest'
 import { app } from '../../src/index'
+import { CreateCourseModel } from '../../src/models/CreateCourseModel'
 
 describe('/course', () => {
   beforeAll(async () => {
@@ -19,6 +20,7 @@ describe('/course', () => {
   })
 
   it(`should create course with correct input data`, async () => {
+    const data: CreateCourseModel = {}
     const createResponse = await request(app)
       .post('/courses')
       .send({title: 'It-incubator course'})
