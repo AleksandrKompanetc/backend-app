@@ -1,6 +1,7 @@
 import request from 'supertest'
 import { app } from '../../src/index'
 import { CreateCourseModel } from '../../src/models/CreateCourseModel'
+import e = require('express')
 
 describe('/course', () => {
   beforeAll(async () => {
@@ -19,12 +20,12 @@ describe('/course', () => {
       .expect(404)
   })
 
-  it(`should create course with correct input data`, async () => {
-    const data: CreateCourseModel = {}
+  it(`shouldn't create course with incorrect input data`, async () => {
+    const data: CreateCourseModel = {title: ''}
     const createResponse = await request(app)
       .post('/courses')
-      .send({title: 'It-incubator course'})
-      .expect(201)
+      .send(data)
+      .expect(400)
 
     const createdCourse = createResponse.body
 
@@ -41,5 +42,23 @@ describe('/course', () => {
   it(`shouldn't update course with incorrect input data`, async () => {
     await request(app)
       .put
+  })
+
+  it('create one more course', async () => {
+    const data: CreateCourseModel = {title: 'It-incubator course 2'}
+
+    const createResponse = await request(app)
+      .post('/courses')
+      .send(data)
+      .expect(201)
+
+    const createdCourse = createResponse.body
+
+    expect(createdCourse).toEqual({
+      id: expect.any(Number)
+      title: data.title
+    })  
+
+    
   })
 })
