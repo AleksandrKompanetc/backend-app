@@ -26,3 +26,12 @@ export const db: { courses: CourseType[]
   ]
 }
 
+export const getCourseViewModel = (dbCourse: CourseType) => {
+  return {
+    id: dbCourse.id,
+    title: dbCourse.title
+  }
+}
+
+app.use(jsonBodyMiddleware)
+
