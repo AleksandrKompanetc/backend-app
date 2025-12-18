@@ -59,5 +59,16 @@ describe('/course', () => {
       .expect(200, [createdCourse])
   })
 
+  it(`shouldn't update course with incorrect input data`, async () => {
+    const data: CreateCourseModel = {title: ''}
+
+    await request(app)
+      .put('/courses/' + createdCourse.id)
+      .send(data)
+      .expect(400)
   
+    await request(app)
+      .get('/courses/' + createdCourse.id)
+      .expect(200, createdCourse1)
+  })
 })
