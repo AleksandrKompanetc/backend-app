@@ -17,7 +17,7 @@ export type CourseType = {
   studentsCount: number
 }
 
-export const db: { courses: CourseType[]
+export const db: { courses: CourseType[] } = {
   courses: [
     { id: 1, title: 'front-end', studentsCount: 100 },
     { id: 2, title: 'back-end', studentsCount: 200 },
@@ -39,6 +39,12 @@ app.get('/courses', (req: Request, res: Response)) => {
   let foundCourses = db.courses
 
   if (req.query.title) {
-    
+    foundCourses = foundCourses.filter(c => c.title.indexOf(req.query.title) > -1)
   }
+
+  res.json(foundCourses.map(getCourseViewModel))
 }
+
+app.get('/courses/:id', (req: Request, res: Response) => {
+  const foundCourse = db.courses.find(c => c.id === +req.params.id)
+})
