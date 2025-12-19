@@ -47,4 +47,15 @@ app.get('/courses', (req: Request, res: Response)) => {
 
 app.get('/courses/:id', (req: Request, res: Response) => {
   const foundCourse = db.courses.find(c => c.id === +req.params.id)
+
+  if (!foundCourse) {
+    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+    return
+  }
+
+  res.json(getCourseViewModel(foundCourse))
+})
+
+app.post('/courses', (req, res) => {
+  if (!)
 })
