@@ -35,3 +35,10 @@ export const getCourseViewModel = (dbCourse: CourseType) => {
 
 app.use(jsonBodyMiddleware)
 
+app.get('/courses', (req: Request, res: Response)) => {
+  let foundCourses = db.courses
+
+  if (req.query.title) {
+    
+  }
+}
