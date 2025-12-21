@@ -26,7 +26,7 @@ export const db: { courses: CourseType[] } = {
   ]
 }
 
-export const getCourseViewModel = (dbCourse: CourseType) => {
+export const getCourseViewModel = (dbCourse: CourseType): CourseViewModel=> {
   return {
     id: dbCourse.id,
     title: dbCourse.title
@@ -35,7 +35,7 @@ export const getCourseViewModel = (dbCourse: CourseType) => {
 
 app.use(jsonBodyMiddleware)
 
-app.get('/courses', (req: Request, res: Response)) => {
+app.get('/courses', (req: RequestWithQuery<QueryCoursesModel>, res: Response<CourseViewModel[]>)) => {
   let foundCourses = db.courses
 
   if (req.query.title) {
@@ -45,7 +45,7 @@ app.get('/courses', (req: Request, res: Response)) => {
   res.json(foundCourses.map(getCourseViewModel))
 }
 
-app.get('/courses/:id', (req: Request, res: Response) => {
+app.get('/courses/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res: Response<CourseViewModel>) => {
   const foundCourse = db.courses.find(c => c.id === +req.params.id)
 
   if (!foundCourse) {
@@ -56,7 +56,7 @@ app.get('/courses/:id', (req: Request, res: Response) => {
   res.json(getCourseViewModel(foundCourse))
 })
 
-app.post('/courses', (req, res) => {
+app.post('/courses', (req: RequestWithBody<CreateCourseModel>, res: Response<CourseViewModel>) => {
   if (!req.body.title) {
     res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400)
     return
@@ -75,7 +75,7 @@ app.post('/courses', (req, res) => {
     .json(getCourseViewModel(createdCourse))
 })
 
-app.delete('/courses/:id', (req, res) => {
+app.delete('/courses/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res) => {
   db.courses = db.courses.filter(c => c.id !== +req.params.id)
   res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
 })
