@@ -80,7 +80,7 @@ app.delete('/courses/:id', (req, res) => {
   res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
 })
 
-app.put('/courses/:id', (req, res) => {
+app.put('/courses/:id', (req: RequestWithParamsAndBody<URIParamsCourseIdModel, UpdateCourseModel>, res) => {
   if (!req.body.title) {
     res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400)
     return
