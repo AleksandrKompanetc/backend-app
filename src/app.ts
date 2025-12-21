@@ -57,5 +57,26 @@ app.get('/courses/:id', (req: Request, res: Response) => {
 })
 
 app.post('/courses', (req, res) => {
-  if (!)
+  if (!req.body.title) {
+    res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400)
+    return
+  }
+
+  const createdCourse: CourseType = {
+    id: +(new Date()),
+    title: req.body.title,
+    studentsCount: 0
+  }
+
+  db.courses.push(createdCourse)
+
+  res
+    .status(HTTP_STATUSES.CREATED_201)
+    .json(getCourseViewModel(createdCourse))
 })
+
+app.delete('/courses/:id', (req, res) => {
+  db.courses = db.courses.filter(c => c.id !== +req.params.id)
+  res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+})
+
