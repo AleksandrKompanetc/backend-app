@@ -80,3 +80,19 @@ app.delete('/courses/:id', (req, res) => {
   res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
 })
 
+app.put('/courses/:id', (req, res) => {
+  if (!req.body.title) {
+    res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400)
+    return
+  }
+  const foundCourse = db.courses.find(c => c.id === +req.params.id)
+
+  if (!foundCourse) {
+    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+    return
+  }
+
+  foundCourse.title = req.body.title
+  res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+})
+
