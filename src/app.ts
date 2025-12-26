@@ -1,7 +1,5 @@
 import express from 'express'
 
-export const app = express()
-
 export const jsonBodyMiddleware = express.json()
 
 export const db: { courses: CourseType[] } = {
