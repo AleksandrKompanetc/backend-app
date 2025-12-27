@@ -35,6 +35,13 @@ app.post('/users', (req, res) => {
   })
 })
 
+app.put('/users/:id', (req, res) => {
+  res.json({
+    message: `User with ID ${req.params.id} updated`,
+    data: req.body
+  })
+})
+
 app.use(express.json())
 
 app.listen(PORT, () => {
