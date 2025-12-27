@@ -42,6 +42,10 @@ app.put('/users/:id', (req, res) => {
   })
 })
 
+app.delete('/users/:id', (req, res) => {
+  res.send(`User ${req.params.id} deleted`);
+})
+
 app.use(express.json())
 
 app.listen(PORT, () => {
