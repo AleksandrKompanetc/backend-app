@@ -15,6 +15,10 @@ app.get('/users/:id', (req, res) => {
   res.send(`User ID requested: ${userId}`);
 })
 
+app.get('/search', (req, res) => {
+  const { q, page } = req.query;
+})
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 })
