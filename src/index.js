@@ -23,6 +23,18 @@ app.get('/search', (req, res) => {
   })
 })
 
+app.post('/users', (req, res) => {
+  const user = req.body;
+  res.status(201).json({
+    message: 'User created',
+    user
+    // {
+    //   name: 'Alex',
+    //   age: 25
+    // }
+  })
+})
+
 app.use(express.json())
 
 app.listen(PORT, () => {
