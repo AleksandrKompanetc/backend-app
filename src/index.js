@@ -65,6 +65,11 @@ app.post('/todos', (req, res) => {
   res.status(201).json(todo)
 })
 
+app.delete('/todos/:id', (req, res) => {
+  todos = todos.filter(t => t.id !== Number(req.params.id))
+  res.send('Todo deleted')
+})
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 })
