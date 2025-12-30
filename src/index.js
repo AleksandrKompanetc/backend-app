@@ -48,6 +48,11 @@ app.delete('/users/:id', (req, res) => {
 
 app.use(express.json())
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`)
+  next()
+})
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 })
