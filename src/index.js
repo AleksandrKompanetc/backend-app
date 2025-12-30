@@ -56,7 +56,7 @@ app.use((req, res, next) => {
 let todos = []
 
 app.get('/todos', (req, res) => {
-  
+  res.json(todos)
 })
 
 app.listen(PORT, () => {
