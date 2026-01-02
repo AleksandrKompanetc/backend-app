@@ -53,6 +53,23 @@ app.use((req, res, next) => {
   next()
 })
 
+// let todos = []
+
+// app.get('/todos', (req, res) => {
+//   res.json(todos)
+// })
+
+// app.post('/todos', (req, res) => {
+//   const todo = { id: Date.now(), text: req.body.text }
+//   todos.push(todo)
+//   res.status(201).json(todo)
+// })
+
+// app.delete('/todos/:id', (req, res) => {
+//   todos = todos.filter(t => t.id !== Number(req.params.id))
+//   res.send('Todo deleted')
+// })
+
 let todos = []
 
 app.get('/todos', (req, res) => {
