@@ -1,57 +1,66 @@
-const express = require('express');
-const app = express();
-const PORT = 3000;
+const app = require('./src/app')
 
-app.get('/', (req, res) => {
-  res.send('Hello Node JS + Express');
+const PORT = 3000
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 })
 
-app.get('/about', (req, res) => {
-  res.send('About page');
-})
 
-app.get('/users/:id', (req, res) => {
-  const userId = req.params.id;
-  res.send(`User ID requested: ${userId}`);
-})
 
-app.get('/search', (req, res) => {
-  const { q, page } = req.query;
-  res.json({ 
-    query: q, 
-    page: page 
-  })
-})
 
-app.post('/users', (req, res) => {
-  const user = req.body;
-  res.status(201).json({
-    message: 'User created',
-    user
-    // {
-    //   name: 'Alex',
-    //   age: 25
-    // }
-  })
-})
 
-app.put('/users/:id', (req, res) => {
-  res.json({
-    message: `User with ID ${req.params.id} updated`,
-    data: req.body
-  })
-})
 
-app.delete('/users/:id', (req, res) => {
-  res.send(`User ${req.params.id} deleted`);
-})
+// const express = require('express');
+// const app = express();
+// const PORT = 3000;
 
-app.use(express.json())
+// app.get('/', (req, res) => {
+//   res.send('Hello Node JS + Express');
+// })
 
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`)
-  next()
-})
+// app.get('/about', (req, res) => {
+//   res.send('About page');
+// })
+
+// app.get('/users/:id', (req, res) => {
+//   const userId = req.params.id;
+//   res.send(`User ID requested: ${userId}`);
+// })
+
+// app.get('/search', (req, res) => {
+//   const { q, page } = req.query;
+//   res.json({ 
+//     query: q, 
+//     page: page 
+//   })
+// })
+
+// app.post('/users', (req, res) => {
+//   const user = req.body;
+//   res.status(201).json({
+//     message: 'User created',
+//     user
+//   })
+// })
+
+// app.put('/users/:id', (req, res) => {
+//   res.json({
+//     message: `User with ID ${req.params.id} updated`,
+//     data: req.body
+//   })
+// })
+
+// app.delete('/users/:id', (req, res) => {
+//   res.send(`User ${req.params.id} deleted`);
+// })
+
+// app.use(express.json())
+
+// app.use((req, res, next) => {
+//   console.log(`${req.method} ${req.url}`)
+//   next()
+// })
 
 // let todos = []
 
@@ -70,23 +79,23 @@ app.use((req, res, next) => {
 //   res.send('Todo deleted')
 // })
 
-let todos = []
+// let todos = []
 
-app.get('/todos', (req, res) => {
-  res.json(todos)
-})
+// app.get('/todos', (req, res) => {
+//   res.json(todos)
+// })
 
-app.post('/todos', (req, res) => {
-  const todo = { id: Date.now(), text: req.body.text }
-  todos.push(todo)
-  res.status(201).json(todo)
-})
+// app.post('/todos', (req, res) => {
+//   const todo = { id: Date.now(), text: req.body.text }
+//   todos.push(todo)
+//   res.status(201).json(todo)
+// })
 
-app.delete('/todos/:id', (req, res) => {
-  todos = todos.filter(t => t.id !== Number(req.params.id))
-  res.send('Todo deleted')
-})
+// app.delete('/todos/:id', (req, res) => {
+//   todos = todos.filter(t => t.id !== Number(req.params.id))
+//   res.send('Todo deleted')
+// })
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-})
+// app.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// })
