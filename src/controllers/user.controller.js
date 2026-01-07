@@ -1,7 +1,11 @@
 let users = [];
 
-exports.getUsers = (req, res) => {
-  res.json(users);
+exports.getUsers = async (req, res, next) => {
+  try {
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
 }
 
 exports.getUserById = (req, res) => {
