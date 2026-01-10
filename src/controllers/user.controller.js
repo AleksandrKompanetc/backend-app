@@ -1,3 +1,9 @@
+const userService = require('../services/user.service');
+
+exports.getUsers = (req, res) => {
+  res.json(userService.getAllUsers());
+}
+
 module.exports = fn => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 }
